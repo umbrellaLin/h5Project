@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+
+    <link href="/ContentStyle/Bootstrap?v=a2WgiorrS1AI2xTkqFt-uaHUlxL8D1BqLO6kuQOaW7A1" rel="stylesheet"/>
+
+    <link href="/ContentStyle/FontAwesome?v=MTA_xdM7VAQ-Gls2Lv2cDMjqR0vwj2lY2uwtpdOecJ01" rel="stylesheet"/>
+
+    <link href="/ContentStyle/NProgress?v=G8Oj0K-ND7SpxVTC15af_9LQMn-piE9c1tFG1FnD-0A1" rel="stylesheet"/>
+
+    
+    <link href="/ContentStyle/CustomThemeStyle?v=gwZeAwldgjk4f7vef9JAdwUx5SIZ9CACBSqwiEC24jc1" rel="stylesheet"/>
+
+
+    <script src="/bundles/jquery?v=FVs3ACwOLIVInrAl5sdzR2jrCDmVOWFbZMY6g6Q0ulE1"></script>
+
+    <script src="/bundles/SignalR?v=Ciiez4_OHGBqVDOVYutDlvDfe8pUFPL4WCdAgi0_pio1"></script>
+
+    <script src="/bundles/JqueryCrypt?v=a9lj_mUMcGV5L9s7cq4uvyrbNSipIpS-KgTGHpefZD41"></script>
+
+    <script src="http://54.65.16.37:8880/signalr/hubs" type="text/javascript"></script>
+    <script src="/bundles/bootstrap_min?v=clcVu4Lcmou_xRuHSx7pW5pLei8nr1SWy7AqzsI37ps1"></script>
+
+    <script src="/bundles/custom_js?v=7MtOlvb7l7lGxNIjEnix6zqgUnB5_PmPH32gPrylTio1"></script>
+
+
+    
+
+        <script type="text/javascript">
+            $(function () {
+                $.connection.hub.url = "http://54.65.16.37:8880/signalr";
+                //$.connection.casinoHub.logging = true;
+
+                var casinoProxy = $.connection.casinoHub;
+
+                $.connection.hub.start({ waitForPageLoad: true }).done(function () {
+                    var crypt = $().crypt({ method: "sha1", source: $("#userPwd").val() });
+                    var account = $("#userName").val();
+                    var password = crypt;
+                    var platformId = $("#LoginPlatform").val();
+                    casinoProxy.server.loginAdmin({ UserName: account, Password: password, PlatformId: platformId })
+                        .done(function (result) {
+                            if (result == 0) {
+                                //alert('登入成功');
+                            }
+                        });
+                });
+            });
+        </script>
+
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="/Home/Index" class="site_title"><i class="fa fa-paw"></i> <span></span></a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <input type="hidden" id="userName" value="michael" />
+                    <input type="hidden" id="userPwd" value="12345" />
+                    <input type="hidden" id="LoginPlatform" value="1" />
+                    <input type="button" id="btnLogin" value="Login" style="display: none;" />
+                    <!-- menu profile quick info -->
+                    
+                    <!-- /menu profile quick info -->
+
+                    <br/>
+                    <!-- sidebar menu -->
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+        <h3>General</h3>
+        <ul class="nav side-menu">
+            <li>
+                <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">                   
+                    <li><a href="/">一般</a></li>
+                    <li><a href="/Home/Maintenance">維護</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /sidebar menu -->
+<!-- Custom Theme Scripts -->
+
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                            
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            
+
+
+<link href="/ContentStyle/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"/>
+
+
+<script src="/bundles/bootstrap_daterangepicker?v=9j0HEzDk_ah7quMex3iR-J9S0AygaHwvK0yh-Q84Di81"></script>
+
+
+<style>
+    .timeDDL {
+        width: 13%;
+    }
+
+    .timeLb {
+        text-align: left;
+        width: 2%;
+    }
+</style>
+<div class="right_col" role="main">
+    <!-- top tiles -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>維護公告<small>different form elements</small></h2>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                    <br>
+                    <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                維護日期<span class="required">*</span>
+                            </label>
+                            <div class="col-md-2 xdisplay_inputx form-group has-feedback">
+                                <input type="text" class="form-control has-feedback-left" id="single_cal4" placeholder="First Name" aria-describedby="inputSuccess2Status4">
+                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                <span id="inputSuccess2Status4" class="sr-only">(success)</span>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-xs-12 timeDDL">
+                                <select id="MaintenHour" class="form-control">
+                                    <option value="">請選擇</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                </select>
+                            </div>
+                            <label class="control-label col-md-1 col-sm-3 col-xs-12 timeLb">時</label>
+
+                            <div class="col-md-2 col-sm-3 col-xs-12 timeDDL">
+                                <select id="MaintenMin" class="form-control">
+                                    <option value="">請選擇</option>
+                                        <option value="00">00</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="40">40</option>
+                                        <option value="50">50</option>
+                                </select>
+                            </div>
+                            <label class="control-label col-md-1 col-sm-3 col-xs-12 timeLb">分</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                持續時間<span class="required">*</span>
+                            </label>
+                            <div class="col-md-2 col-sm-3 col-xs-12 timeDDL">
+                                <select id="MaintenAssMin" class="form-control">
+                                    <option value="">請選擇</option>
+                                    <option value="10">10分鐘</option>
+                                    <option value="20">20分鐘</option>
+                                        <option value="30">30分鐘  (0.5) 小時</option>
+                                        <option value="60">60分鐘  (1) 小時</option>
+                                        <option value="90">90分鐘  (1.5) 小時</option>
+                                        <option value="120">120分鐘  (2) 小時</option>
+                                        <option value="150">150分鐘  (2.5) 小時</option>
+                                        <option value="180">180分鐘  (3) 小時</option>
+                                        <option value="210">210分鐘  (3.5) 小時</option>
+                                        <option value="240">240分鐘  (4) 小時</option>
+                                        <option value="270">270分鐘  (4.5) 小時</option>
+                                        <option value="300">300分鐘  (5) 小時</option>
+                                </select>
+                            </div>
+                            <label class="control-label col-md-1 col-sm-3 col-xs-12 timeLb">分</label>
+                        </div>
+                        <input type="hidden" id="MaintenTimeHid" value="" />
+                        <input type="hidden" id="MaintenContentHid" value="娛樂場將於{1}~{2}進行維護" />
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">維護公告內容 </label>
+                            <div class="col-md-6 col-sm-9 col-xs-12">
+                                <textarea id="MainTenContent" class="resizable_textarea form-control" placeholder="請輸入..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="button" id="PostMaintenBtn" class="btn btn-success">送出</button>
+                                <button type="button" id="CancalMaintenBtn" class="btn btn-danger" style="display:none;">取消</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(function () {
+        var casinoProxy = $.connection.casinoHub;
+        InitialTimer();
+    });
+
+    $("#single_cal4").change(function () {
+        var time = $("#single_cal4").val();
+        $("#MaintenTimeHid").val(time);
+        GetContent();
+    });
+    $("#MaintenHour").change(function () {
+        GetContent();
+    });
+    $("#MaintenMin").change(function () {
+        GetContent();
+    });
+    $("#MaintenAssMin").change(function () {
+        GetContent();
+    });
+
+    //送出維護公告
+    $('#PostMaintenBtn').click(function () {
+        if ($('#MaintenHour').val() == '') {
+            $('#MaintenHour').focus();
+            alert('未選擇起始時間(時)');
+            return false;
+        }
+
+        if ($('#MaintenMin').val() == '') {
+            $('#MaintenMin').focus();
+            alert('未選擇起始時間(分)');
+            return false;
+        }
+
+        if ($('#MaintenAssMin').val() == '') {
+            $('#MaintenAssMin').focus();
+            alert('未選擇持續時間');
+            return false;
+        }
+
+        if (confirm('確定送出維護公告?')) {
+            //var t1 = $('#MaintenHour').val() + ':' + $('#MaintenMin').val();
+            var maintenceObj =
+            {
+                "StartDateTime": $("#MaintenTimeHid").val() + ' ' + $('#MaintenHour').val() + ':' + $('#MaintenMin').val(),
+                "Message": $('#MainTenContent').val()
+            };
+
+            var maintenceInfo = JSON.stringify(maintenceObj);
+
+            $.ajax({
+                type: "POST",
+                url: '/api/MaintenanceMessage',
+                contentType: "application/json; charset=utf-8",
+                data: maintenceInfo,
+                success: function (res) {
+                    if (res && res.ErrorCode === 0) {
+                        $('#PostMaintenBtn').hide();
+                        $('#CancalMaintenBtn').show();
+                    } else {
+                        alert('送出失敗');
+                    }
+                }
+            });
+        }
+    });
+
+    //取消維護公告
+    $('#CancalMaintenBtn').click(function () {
+        if (confirm('確定取消維護公告?')) {
+            $.ajax({
+                type: "DELETE",
+                url: '/api/MaintenanceMessage',
+                contentType: "application/json; charset=utf-8",
+                success: function (res) {
+                    if (res && res.ErrorCode === 0) {
+                        $('#PostMaintenBtn').show();
+                        $('#CancalMaintenBtn').hide();
+                    } else {
+                        alert('送出失敗');
+                    }
+                }
+            });
+        }
+    });
+
+    //產生公告內容
+    function GetContent() {
+        if ($('#MaintenHour').val() != '' && $('#MaintenMin').val() != '' && $('#MaintenAssMin').val() != '') {
+            var date = $("#MaintenTimeHid").val();
+            var t1 = GetFormatTime($('#MaintenHour').val() + ':' + $('#MaintenMin').val());
+            var t2 = GetTillTime(t1, $('#MaintenAssMin').val());
+            var contentText = $('#MaintenContentHid').val().replace('{1}', t1).replace('{2}', t2);
+            $('#MainTenContent').val(contentText);
+        }
+    }
+
+    //時間格式修改
+    function GetFormatTime(t1) {
+        var t1_Array = t1.split(':');
+        var hour = parseInt(t1_Array[0]);
+        var min = parseInt(t1_Array[1]);
+
+        var outHour = (hour > 10) ? hour : '0' + hour;
+        var outMin = ((min) == 0) ? '00' : min;
+
+        return outHour + ':' + outMin;
+    }
+
+    //時間計算
+    function GetTillTime(t1, t2) {
+        var t1_Array = t1.split(':');
+        var hour = parseInt(t1_Array[0]);
+        var min = parseInt(t1_Array[1]) + parseInt(t2);
+
+
+        if (min >= 60) {
+            hour += Math.floor(min / 60);
+            min = (min % 60);
+
+        }
+        var outHour = (hour > 10) ? hour : '0' + hour;
+        var outMin = ((min) == 0) ? '00' : min;
+
+        return outHour + ':' + outMin;
+    }
+
+    function InitialTimer() {
+        var tid = setInterval(mycode, 3000);
+        function mycode() {
+            $.ajax({
+                type: "GET",
+                url: '/api/MaintenanceMessage',
+                contentType: "application/json; charset=utf-8",
+                success: function (res) {
+                    if (res && res.State === 0) {
+                        $('#PostMaintenBtn').hide();
+                        $('#CancalMaintenBtn').show();
+                    } else {
+                        $('#PostMaintenBtn').show();
+                        $('#CancalMaintenBtn').hide();
+                    }
+                }
+            });
+        }
+        function abortTimer() { // to be called when you want to stop the timer
+            clearInterval(tid);
+        }
+    }
+
+</script>
+
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    Casino Dashboard - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+</body>
+</html>
+<!-- Custom Theme Scripts -->
+<script src="/ContentStyle/build/js/custom.js"></script>

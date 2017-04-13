@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>  
+    <script type="text/javascript" charset="utf-8">  
+      console.log('this = ', this);  
+      console.log('this == window ?', this == window);  
+      console.log('window = ', window);  
+      console.log('Window = ', Window)  
+      console.log('Window == window ?', Window == window)
+    </script>
+  </head>
+
+  <body>
+    <script src="js/test.js" charset="utf-8"></script>
+
+    <h1 id='h1'>深入理解Javascript</h1>  
+
+    1+1=<span id="AnswerBox">_</span>　
+
+    <p> <button type="button" onclick="myFun()">送出</button> </b> </p>
+    <p> <button type="button" onclick="ShowAnswer()">送出</button> </p>
+      
+    <form action="" class="am-form" data-am-validator>
+      <p> <input type="text" class="am-form-field" placeholder="日历组件" data-am-datepicker readonly required /> </p>
+      <p> <button class="am-btn am-btn-primary">提交</button> </p>
+    </form>
+
+    <p id="StringFont">嘗試將文字變為藍色</p>
+
+    <input type="button" value="變更文字顏色" onclick="ChangeFontColor()">
+  </body>
+</html>
+
